@@ -38,13 +38,28 @@ const app = express();
 
 const PORT = Number(process.env.PORT || 3001);
 const NODE_ENV = process.env.NODE_ENV || "development";
-const CORS_ORIGIN = process.env.CORS_ORIGIN || true;
-const SHOPIFY_STORE_DOMAIN =
-  process.env.SHOPIFY_STORE_DOMAIN || "mvpvisuals-demo.myshopify.com";
+const SHOPIFY_STORE_DOMAIN = process.env.SHOPIFY_STORE_DOMAIN || "";
+
+const corsEnv = process.env.CORS_ORIGIN || "*";
+const configuredOrigins = corsEnv
+  ? corsEnv.split(",").map((s) => s.trim()).filter(Boolean)
+  : [];
 
 app.use(
   cors({
-    origin: CORS_ORIGIN === "true" ? true : CORS_ORIGIN,
+    origin: (origin, callback) => {
+      // Allow requests with no origin (like mobile apps, curl, server-to-server)
+      if (!origin) return callback(null, true);
+      if (
+        corsEnv === "*" ||
+        configuredOrigins.includes(origin) ||
+        configuredOrigins.includes("*")
+      ) {
+        return callback(null, true);
+      }
+      return callback(null, false);
+    },
+    credentials: true,
   })
 );
 

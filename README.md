@@ -4,8 +4,8 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178c6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Three.js](https://img.shields.io/badge/Three.js-r182-black?logo=three.js&logoColor=white)](https://threejs.org/)
 [![Vite](https://img.shields.io/badge/Vite-8.3-646cff?logo=vite&logoColor=white)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38bdf8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-[![GSAP](https://img.shields.io/badge/GSAP-3.12-88ce02?logo=greensock&logoColor=white)](https://greensock.com/)
+[![Frontend Deployment: Vercel](https://img.shields.io/badge/Frontend-Vercel-black?logo=vercel&logoColor=white)](https://tent-configurator-rho.vercel.app/)
+[![Backend Deployment: Render](https://img.shields.io/badge/Backend-Render-46E3B7?logo=render&logoColor=black)](https://tent-configurator-api.onrender.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 A high-performance, responsive 3D/2D interactive commercial product configurator inspired by [MVP Visuals](https://mvpvisuals.com/products/10x10-custom-canopy-tent). Built with **React 19**, **TypeScript**, **Three.js / React Three Fiber**, **GLSL WebGL Shaders**, **GSAP Animations**, and **Tailwind CSS v4**.
@@ -77,9 +77,12 @@ Features real-time dye sublimation print simulation, custom WebGL procedural sha
 
 ## 🎯 Live Demo & Reference
 
-- **Reference Experience**: [MVP Visuals 10x10 Custom Canopy Tent](https://mvpvisuals.com/products/10x10-custom-canopy-tent)
-- **Local Dev Server**: `http://localhost:5174/`
-- **Backend API**: `http://localhost:3001/`
+- **Frontend Live Demo**: [https://tent-configurator-rho.vercel.app/](https://tent-configurator-rho.vercel.app/)
+- **Backend API (Render)**: [https://tent-configurator-api.onrender.com/](https://tent-configurator-api.onrender.com/)
+- **API Health Check**: [https://tent-configurator-api.onrender.com/api/health](https://tent-configurator-api.onrender.com/api/health)
+- **Reference Product**: [MVP Visuals 10x10 Custom Canopy Tent](https://mvpvisuals.com/products/10x10-custom-canopy-tent)
+- **Local Dev URL**: `http://localhost:5174/`
+- **Local Backend API**: `http://localhost:3001/`
 
 ---
 
@@ -269,7 +272,7 @@ To embed the configurator into an external website, Shopify store, or CMS:
 
 ```html
 <iframe
-  src="https://your-configurator-domain.com/?embed=true"
+  src="https://tent-configurator-rho.vercel.app/?embed=true"
   width="100%"
   height="750px"
   frameborder="0"
@@ -313,16 +316,21 @@ Environment files are safely excluded in [.gitignore](file:///home/prakash/Progr
 
 ### Frontend ([.env](file:///home/prakash/Programs/Projects/tent-configurator/.env))
 ```env
+# Production Backend API on Render
 VITE_PORT=5174
-VITE_API_URL=http://localhost:3001
+VITE_API_URL=https://tent-configurator-api.onrender.com
 VITE_APP_TITLE=MVP Visuals Custom Canopy Configurator
+
+# For local development against local server:
+# VITE_API_URL=http://localhost:3001
 ```
 
 ### Backend ([server/.env](file:///home/prakash/Programs/Projects/tent-configurator/server/.env))
 ```env
+# Production Environment
 PORT=3001
-NODE_ENV=development
-CORS_ORIGIN=http://localhost:5174
+NODE_ENV=production
+CORS_ORIGIN=https://tent-configurator-rho.vercel.app,http://localhost:5174
 SHOPIFY_STORE_DOMAIN=mvpvisuals-demo.myshopify.com
 ```
 
